@@ -16,7 +16,7 @@ start <- function(bot, update){
 start_handler <- CommandHandler("start", start)
 updater <- updater + start_handler
 
-# creates command to kill bot --------------------------------------------- 
+# creates command to kill bot -------------------------------------------------
 kill <- function(bot, update){ 
   bot$sendMessage(chat_id = update$message$chat_id, 
                   text = "Stopping...") 
@@ -41,7 +41,8 @@ Thank you! 💖"
 
 # sends welcome message --------------------------------------------------- 
 welcome <- function(bot, update){ 
-  escape_username <- str_replace_all(update$message$new_chat_participant$username, c("\\*"="\\\\*", "_"="\\\\_")) 
+  escape_username <- str_replace_all(update$message$new_chat_participant$username, 
+                                     c("\\*"="\\\\*", "_"="\\\\_")) 
   welcome_message <- paste0('Welcome, ', update$message$new_chat_participant$first_name, 
                             ' (@', escape_username,')! \n\n', welcome_text) 
   
@@ -54,4 +55,10 @@ welcome <- function(bot, update){
 updater <- updater + MessageHandler(welcome, MessageFilters$all) 
 
 # starts bot -------------------------------------------------------------- 
-updater$start_polling()
+#updater$start_polling()
+
+# get port value ----------------------------------------------------------
+PORT <- Sys.getenv(('RSTUDIO_SESSION_PORT'))
+
+# Start the Bot
+updater$bot$set_webhook(paste0('https://telegram-bot-rladies.herokuapp.com/',RLadiesRdg))
