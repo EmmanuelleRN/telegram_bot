@@ -1,0 +1,15 @@
+# user specific files
+.Ruserdata
+
+# Historical
+.Rhistory
+.Rapp.history
+
+# Session data
+.RData
+
+# Rstudio 
+.Rproj.user
+
+# Bot token
+token.R
